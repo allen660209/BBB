@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <meta charset=utf-8 />
+    <title>Woki獎號計算</title>
+
+  </head>
+  <body>
+      <div style="font-weight:bold;font-size:40px;align-content:center;vertical-align:middle;width:780px;"> ***** Woki獎號計算 ***** </div>
+      <form name=F1 style="font-weight:bold;font-size:30px;padding:10px;margin-top:10px;margin-bottom:10px;background-color:hotpink;width:780px;vertical-align:middle">
+          上期獎號：<input style="width:60px;font-weight:bold;font-size:30px" type="text" onblur="check_int('P1')" id="P1" maxlength="2" >
+                    <input style="width:60px;font-weight:bold;font-size:30px" type="text" onblur="check_int('P2')" id="P2" maxlength="2">
+                    <input style="width:60px;font-weight:bold;font-size:30px"type="text" onblur="check_int('P3')" id="P3" maxlength="2">
+                    <input style="width:60px;font-weight:bold;font-size:30px"type="text" onblur="check_int('P4')" id="P4" maxlength="2"> 請輸入獎號
+      </form>
+      <form name=F2 style="font-weight:bold;font-size:30px;padding:10px;margin-top:10px;margin-bottom:10px;background-color:cornflowerblue;width:780px;">
+          本期獎號：<input style="width:60px;font-weight:bold;font-size:30px" type="text" onblur="check_int('T1')" id="T1" maxlength="2">
+                    <input style="width:60px;font-weight:bold;font-size:30px"type="text" onblur="check_int('T2')" id="T2" maxlength="2">
+                    <input style="width:60px;font-weight:bold;font-size:30px"type="text" onblur="check_int('T3')" id="T3" maxlength="2">
+                    <input style="width:60px;font-weight:bold;font-size:30px"type="text" onblur="check_int('T4')" id="T4" maxlength="2"> 請輸入獎號
+        
+      </form>
+
+      <form style="font-weight:bold;font-size:40px;color:white;background-color:green;width:450px;padding:10px;margin-top:10px;margin-bottom:10px"> 
+          A = <input type="text" id="A" readonly="readonly" style="border-top:0;border-bottom:0;border-left:0;border-right:0;width:200px;font-weight:bold;font-size:40px;color:white;background-color:green">
+      </form>
+      <form style="font-weight:bold;font-size:40px;color:black;padding:10px;margin-top:10px;margin-bottom:10px">
+          B = <input onkeyup="value=value.replace(/[^\d]/g,'')" type="text" id="B" style="width:120px;font-weight:bold;font-size:40px;color:block"> 請輸入總票數
+      </form>
+      <form style="font-weight:bold;font-size:40px;color:white;background-color:purple;width:450px;padding:10px;margin-top:10px;margin-bottom:10px"> 
+          C = <input type="text" id="C" readonly="readonly"style="border-top:0;border-bottom:0;border-left:0;border-right:0;width:200px;font-weight:bold;font-size:40px;color:white;background-color:purple">
+      </form>
+      <form style="font-weight:bold;font-size:40px;color:black;background-color:orange;width:450px;padding:10px;margin-top:10px;margin-bottom:10px">
+          D = <input type="text" id="D" readonly="readonly"style="border-top:0;border-bottom:0;border-left:0;border-right:0;width:200px;font-weight:bold;font-size:40px;color:block;background-color:orange">
+      </form>
+      <form style="font-weight:bold;font-size:40px;color:white;background-color:red;width:450px;padding:10px;margin-top:10px;margin-bottom:10px">
+          Jackpot = <input type="text" id="Jackpot" readonly="readonly"style="border-top:0;border-bottom:0;border-left:0;border-right:0;width:200px;font-weight:bold;font-size:40px;color:white;background-color:red">
+      </form>
+
+
+
+      <script >      
+          var FormId,PTotal,TTotal
+          function check_int(FormId) {
+          if (FormId == "P1") {
+                  if (isNaN(document.F1.P1.value)) {
+                      alert("請輸入數字");
+                      //document.F1.P1.focus();
+                      $('input[id="P1"]').val('');
+                  }
+                  else {
+                      if (document.F1.P1.value.length == 1) { //輸入值只有1個欄位，前面補1個0
+                           $('input[id="P1"]').val('0' + document.F1.P1.value)
+                      }
+                  }
+                  //算出A的欄位
+                  PTotal = (document.F1.P1.value + document.F1.P2.value + document.F1.P3.value + document.F1.P4.value)
+                  TTotal = (document.F2.T1.value + document.F2.T2.value + document.F2.T3.value + document.F2.T4.value)
+                  $('input[id="A"]').val(parseInt(PTotal) + parseInt(TTotal));
+          }
+              else if (FormId == "P2") {
+                  if (isNaN(document.F1.P2.value)) {
+                      alert("請輸入數字");
+                      $('input[id="P2"]').val('');
+                  }
+                  else {
+                      if (document.F1.P2.value.length == 1) { //輸入值只有1個欄位，前面補1個0
+                           $('input[id="P2"]').val('0' + document.F1.P2.value)
+                      }
+                  }         
+                  //算出A的欄位
+                  PTotal = (document.F1.P1.value + document.F1.P2.value + document.F1.P3.value + document.F1.P4.value)
+                  TTotal = (document.F2.T1.value + document.F2.T2.value + document.F2.T3.value + document.F2.T4.value)
+                  $('input[id="A"]').val(parseInt(PTotal) + parseInt(TTotal));
+              }
+              else if (FormId == "P3") {
+                  if (isNaN(document.F1.P3.value)) {
+                      alert("請輸入數字");
+                      $('input[id="P3"]').val('');
+                  }
+                  else {
+                      if (document.F1.P3.value.length == 1) { //輸入值只有1個欄位，前面補1個0
+                          $('input[id="P3"]').val('0' + document.F1.P3.value)
+                      }
+                  }
+                  //算出A的欄位
+                  PTotal = (document.F1.P1.value + document.F1.P2.value + document.F1.P3.value + document.F1.P4.value)
+                  TTotal = (document.F2.T1.value + document.F2.T2.value + document.F2.T3.value + document.F2.T4.value)
+                  $('input[id="A"]').val(parseInt(PTotal) + parseInt(TTotal));
+              }
+              else if (FormId == "P4") {
+                  if (isNaN(document.F1.P4.value)) {
+                      alert("請輸入數字");
+                      $('input[id="P4"]').val('');
+                  }
+                  else {
+                      if (document.F1.P4.value.length == 1) { //輸入值只有1個欄位，前面補1個0
+                          $('input[id="P4"]').val('0' + document.F1.P4.value)
+                      }
+                  }
+                  //算出A的欄位
+                  PTotal = (document.F1.P1.value + document.F1.P2.value + document.F1.P3.value + document.F1.P4.value)
+                  TTotal = (document.F2.T1.value + document.F2.T2.value + document.F2.T3.value + document.F2.T4.value)
+                  $('input[id="A"]').val(parseInt(PTotal) + parseInt(TTotal));
+              }
+
+              else if (FormId == "T1") {
+                  if (isNaN(document.F2.T1.value)) {
+                      alert("請輸入數字");
+                      $('input[id="T1"]').val('');
+                  }
+                  else {
+                      if (document.F2.T1.value.length == 1) { //輸入值只有1個欄位，前面補1個0
+                          $('input[id="T1"]').val('0' + document.F2.T1.value)
+                      }
+                  }
+                  //算出A的欄位
+                  PTotal = (document.F1.P1.value + document.F1.P2.value + document.F1.P3.value + document.F1.P4.value)
+                  TTotal = (document.F2.T1.value + document.F2.T2.value + document.F2.T3.value + document.F2.T4.value)
+                  $('input[id="A"]').val(parseInt(PTotal) + parseInt(TTotal));
+              }
+              else if (FormId == "T2") {
+                  if (isNaN(document.F2.T2.value)) {
+                      alert("請輸入數字");
+                      $('input[id="T2"]').val('');
+                  }
+                  else {
+                      if (document.F2.T2.value.length == 1) { //輸入值只有1個欄位，前面補1個0
+                          $('input[id="T2"]').val('0' + document.F2.T2.value)
+                      }
+                  }
+                  //算出A的欄位
+                  PTotal = (document.F1.P1.value + document.F1.P2.value + document.F1.P3.value + document.F1.P4.value)
+                  TTotal = (document.F2.T1.value + document.F2.T2.value + document.F2.T3.value + document.F2.T4.value)
+                  $('input[id="A"]').val(parseInt(PTotal) + parseInt(TTotal));
+              }
+              else if (FormId == "T3") {
+                  if (isNaN(document.F2.T3.value)) {
+                      alert("請輸入數字");
+                      $('input[id="T3"]').val('');
+                  }
+                  else {
+                      if (document.F2.T3.value.length == 1) { //輸入值只有1個欄位，前面補1個0
+                          $('input[id="T3"]').val('0' + document.F2.T3.value)
+                      }
+                  }
+                  //算出A的欄位
+                  PTotal = (document.F1.P1.value + document.F1.P2.value + document.F1.P3.value + document.F1.P4.value)
+                  TTotal = (document.F2.T1.value + document.F2.T2.value + document.F2.T3.value + document.F2.T4.value)
+                  $('input[id="A"]').val(parseInt(PTotal) + parseInt(TTotal));
+              }
+              else if (FormId == "T4") {
+                  if (isNaN(document.F2.T4.value)) {
+                      alert("請輸入數字");
+                      $('input[id="T4"]').val('');
+                  }
+                  else {
+                      if (document.F2.T4.value.length == 1) { //輸入值只有1個欄位，前面補1個0
+                          $('input[id="T4"]').val('0' + document.F2.T4.value)
+                      }
+                  }
+                  //算出A的欄位
+                  PTotal = (document.F1.P1.value + document.F1.P2.value + document.F1.P3.value + document.F1.P4.value)
+                  TTotal = (document.F2.T1.value + document.F2.T2.value + document.F2.T3.value + document.F2.T4.value)
+                  $('input[id="A"]').val(parseInt(PTotal) + parseInt(TTotal));
+              }
+          }
+
+
+
+      </script>
+
+      <script src="scripts/main.js">
+          
+      </script>
+
+</body>
+</html>
